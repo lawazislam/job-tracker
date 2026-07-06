@@ -1,0 +1,155 @@
+/* Design tokens: matched to lawazislam.vercel.app so the app reads as
+   part of the same identity. Data-track green is the accent. */
+:root {
+  --bg: #0d1117;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-hover: rgba(255, 255, 255, 0.07);
+  --border: rgba(255, 255, 255, 0.09);
+  --text: #e6edf3;
+  --text-dim: #8b949e;
+  --accent: #5fed83;
+  --accent-dim: #0d3024;
+  --danger: #f85149;
+  --mono: ui-monospace, "JetBrains Mono", "SF Mono", Menlo, Consolas, monospace;
+  --sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+
+  /* one color per pipeline stage */
+  --st-saved: #8b949e;
+  --st-applied: #58a6ff;
+  --st-screening: #a371f7;
+  --st-interview: #f0b429;
+  --st-offer: #5fed83;
+  --st-rejected: #f85149;
+  --st-withdrawn: #6e7681;
+  --st-ghosted: #484f58;
+}
+
+* { box-sizing: border-box; margin: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  line-height: 1.5;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 20px 80px;
+}
+
+.topbar { display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; flex-wrap: wrap; }
+.topbar h1 { font-size: 26px; font-weight: 650; letter-spacing: -0.3px; }
+.topbar__sub { font-family: var(--mono); color: var(--accent); font-size: 13px; margin-top: 2px; }
+
+.btn {
+  background: var(--surface); color: var(--text);
+  border: 1px solid var(--border); border-radius: 6px;
+  padding: 9px 16px; font-size: 14px; cursor: pointer;
+  transition: background 0.15s ease;
+}
+.btn:hover { background: var(--surface-hover); }
+.btn--primary { background: var(--accent-dim); border-color: rgba(95, 237, 131, 0.4); color: var(--accent); font-weight: 550; }
+.btn--primary:hover { background: rgba(95, 237, 131, 0.18); }
+.btn:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
+
+/* Stats strip */
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 10px; margin: 28px 0 20px; }
+.stat {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 14px;
+}
+.stat__n { font-family: var(--mono); font-size: 22px; font-weight: 600; }
+.stat__label { color: var(--text-dim); font-size: 12px; text-transform: capitalize; }
+
+/* Add form */
+.add-form {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px; margin-bottom: 24px;
+}
+.add-form__grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.add-form__wide { grid-column: 1 / -1; }
+.add-form label { display: flex; flex-direction: column; gap: 5px; font-size: 13px; color: var(--text-dim); }
+.add-form input, .add-form select, .add-form textarea {
+  background: var(--bg); color: var(--text);
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 8px 10px; font-size: 14px; font-family: inherit;
+}
+.add-form__actions { display: flex; gap: 10px; margin-top: 16px; }
+
+/* Filters */
+.filters { display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 14px; }
+.filters__pills { display: flex; gap: 6px; flex-wrap: wrap; }
+.pill {
+  font-family: var(--mono); font-size: 12px;
+  background: none; color: var(--text-dim);
+  border: 1px solid var(--border); border-radius: 60px;
+  padding: 5px 12px; cursor: pointer;
+}
+.pill.is-active { color: var(--accent); border-color: rgba(95, 237, 131, 0.5); background: var(--accent-dim); }
+#search {
+  background: var(--surface); color: var(--text);
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 8px 12px; font-size: 14px; min-width: 200px;
+}
+
+/* Table */
+.apps-table { width: 100%; border-collapse: collapse; }
+.apps-table th {
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: 0.6px;
+  color: var(--text-dim); text-align: left;
+  padding: 10px 12px; border-bottom: 1px solid var(--border);
+}
+.apps-table td { padding: 12px; border-bottom: 1px solid var(--border); font-size: 14px; vertical-align: middle; }
+.apps-table tbody tr:hover { background: var(--surface); }
+.cell-company { font-weight: 560; }
+.cell-role { color: var(--text-dim); }
+.cell-date { font-family: var(--mono); font-size: 13px; color: var(--text-dim); white-space: nowrap; }
+
+/* Status select styled as a colored pill */
+.status-select {
+  font-family: var(--mono); font-size: 12px; font-weight: 550;
+  border-radius: 60px; padding: 4px 10px;
+  border: 1px solid; background: transparent; cursor: pointer;
+  appearance: none; -webkit-appearance: none;
+}
+.status-select option { background: var(--bg); color: var(--text); }
+
+.btn-delete {
+  background: none; border: none; color: var(--text-dim);
+  cursor: pointer; font-size: 15px; padding: 4px 8px; border-radius: 6px;
+}
+.btn-delete:hover { color: var(--danger); background: rgba(248, 81, 73, 0.1); }
+
+.empty { text-align: center; color: var(--text-dim); padding: 48px 0; }
+
+/* Toast */
+.toast {
+  position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+  background: #161b22; border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px 18px; font-size: 14px;
+  max-width: 480px; box-shadow: 0 8px 30px rgba(0,0,0,0.5);
+}
+.toast--error { border-color: rgba(248, 81, 73, 0.5); }
+
+/* Mobile: table collapses to cards */
+@media (max-width: 760px) {
+  .add-form__grid { grid-template-columns: 1fr; }
+  .apps-table thead { display: none; }
+  .apps-table, .apps-table tbody, .apps-table tr, .apps-table td { display: block; }
+  .apps-table tr {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; margin-bottom: 12px; padding: 8px 4px;
+  }
+  .apps-table td { border: none; padding: 6px 14px; }
+  .apps-table td[data-label]::before {
+    content: attr(data-label);
+    font-family: var(--mono); font-size: 10px; text-transform: uppercase;
+    letter-spacing: 0.6px; color: var(--text-dim); display: block;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+}

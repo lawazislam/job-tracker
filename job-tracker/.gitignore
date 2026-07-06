@@ -1,0 +1,4 @@
+__pycache__/
+*.pyc
+backend/tracker.db
+.pytest_cache/
