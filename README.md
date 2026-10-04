@@ -20,7 +20,7 @@ through the stages.
 
 - **Backend:** Python, FastAPI, SQLite (raw `sqlite3`, no ORM)
 - **Frontend:** plain HTML/CSS/JS, no frameworks, served by FastAPI
-- **Tests:** pytest, 6 end-to-end API tests against an isolated temporary database
+- **Tests:** pytest, 7 end-to-end API tests against an isolated temporary database
 
 ## Run it locally
 
